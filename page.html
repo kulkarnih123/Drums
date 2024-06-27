@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="page.CSS">
+</head>
+<body>
+    <div class="keys">
+        <div data-key="65" class="key">A</div>
+        <div data-key="66" class="key">B</div>
+        <div data-key="67" class="key">C</div>
+        <div data-key="68" class="key">D</div>
+        <div data-key="69" class="key">E</div>
+        <div data-key="70" class="key">F</div>
+        <div data-key="71" class="key">G</div>
+        <div data-key="72" class="key">H</div>
+        <div data-key="73" class="key">I</div>
+        <div data-key="74" class="key">J</div>
+    </div>
+
+    <audio data-key="65" src="../img/aud1.wav"></audio>
+    <audio data-key="66" src="../img/aud2.mp3"></audio>
+    <audio data-key="67" src="../img/aud3.mp3"></audio>
+    <audio data-key="68" src="../img/aud4.mp3"></audio>
+    <audio data-key="69" src="../img/aud5.mp3"></audio>
+    <audio data-key="70" src="../img/aud6.wav"></audio>
+    <audio data-key="71" src="../img/aud7.mp3"></audio>
+    <audio data-key="72" src="../img/aud8.mp3"></audio>
+    <audio data-key="73" src="../img/aud9.mp3"></audio>
+    <audio data-key="74" src="../img/aud10.mp3"></audio>
+
+    <script>
+        window.addEventListener('keydown', playSound)
+
+        function playSound(e){
+           const audio= document.querySelector(`audio[data-key="${e.keyCode}"]`)
+           const key= document.querySelector(`.key[data-key="${e.keyCode}"]`)
+           if(!audio) return;
+           audio.currentTime=0;
+           audio.play()
+           key.classList.add('playing')
+        }
+
+        function removeTransition(e){
+            if(e.propertyName != "transform") return;
+            this.classList.remove('playing')
+        }
+
+        const keys=document.querySelectorAll('.key')
+        keys.forEach(key=>key.addEventListener("transitionend", removeTransition))
+
+    </script>
+   
+</body>
+</html>
